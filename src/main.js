@@ -5,6 +5,8 @@ var posterImage = document.querySelector(".poster-img")
 var posterTitle = document.querySelector(".poster-title")
 //quote:
 var posterQuote = document.querySelector(".poster-quote")
+//Show Random button:
+var showRandomButton = document.querySelector(".show-random")
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -107,13 +109,14 @@ var savedPosters = [];
 var currentPoster; // how we overwrite poster w/new poster
 
 // event listeners go here 👇
-
+showRandomButton.addEventListener("click", displayRandomPoster)
+window.addEventListener("load", displayRandomPoster)
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function generateRandomPoster() {
+function generateRandomPosterObject() {
   var randomImage = images[getRandomIndex(images)]
   var randomTitle = titles[getRandomIndex(titles)]
   var randomQuote = quotes[getRandomIndex(quotes)]
@@ -127,7 +130,10 @@ function displayPoster(newPoster) {
   posterTitle.innerText = newPoster.title;
   posterQuote.innerText = newPoster.quote;
 }
-displayPoster(generateRandomPoster())
+
+function displayRandomPoster() {
+  displayPoster(generateRandomPosterObject())
+}
 // function testFunction() {
 //   currentPoster = new Poster("URL", "I'm the title");
 //   var titleText = document.querySelector(".poster-title")
