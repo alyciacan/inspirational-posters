@@ -5,13 +5,7 @@ var posterImage = document.querySelector(".poster-img")
 posterImage.src="./assets/butterfly.jpg"
 
 
-function testFunction() {
-  currentPoster = new Poster("URL", "I'm the title");
-  var titleText = document.querySelector(".poster-title")
-  titleText.innerText = currentPoster.title;
-}
-testFunction();
-// testFunction()
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -116,7 +110,27 @@ var currentPoster; // how we overwrite poster w/new poster
 // event listeners go here 👇
 
 // functions and event handlers go here 👇
-// (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
+function generateRandomPoster() {
+  var randomImage = getRandomIndex(images)
+  var randomTitle = getRandomIndex(titles)
+  var randomQuote = getRandomIndex(quotes)
+  var newPoster = new Poster(randomImage, randomTitle, randomQuote)
+  return newPoster
+}
+
+
+
+// function testFunction() {
+//   currentPoster = new Poster("URL", "I'm the title");
+//   var titleText = document.querySelector(".poster-title")
+//   titleText.innerText = currentPoster.title;
+// }
+// testFunction();
+
+// testFunction()
+
+// (we've provided one for you to get you started)!
