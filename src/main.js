@@ -1,15 +1,17 @@
-var posterClass = require("../src/poster")
-//test poster to make sure our class works:
-var testPoster = new posterClass("./assets/butterfly.jpg", "determination", "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.")
-console.log(testPoster)
 // query selector variables go here 👇
 
 //make sure we can reassign img in html file:
-// var posterImage = document.querySelector(".poster-img")
-// posterImage.src="./assets/butterfly.jpg"
+var posterImage = document.querySelector(".poster-img")
+posterImage.src="./assets/butterfly.jpg"
 
-var titleText = document.querySelector("poster-title")
-titleText = "clarity"
+
+function testFunction() {
+  currentPoster = new Poster("URL", "I'm the title");
+  var titleText = document.querySelector(".poster-title")
+  titleText.innerText = currentPoster.title;
+}
+testFunction();
+// testFunction()
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -109,7 +111,7 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster;
+var currentPoster; // how we overwrite poster w/new poster
 
 // event listeners go here 👇
 
