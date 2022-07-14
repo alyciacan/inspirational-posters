@@ -1,11 +1,12 @@
 // query selector variables go here 👇
-
-//make sure we can reassign img in html file:
+//image:
 var posterImage = document.querySelector(".poster-img")
-posterImage.src="./assets/butterfly.jpg"
-
-
-
+//title:
+var posterTitle = document.querySelector(".poster-title")
+//quote:
+var posterQuote = document.querySelector(".poster-quote")
+//Show Random button:
+var showRandomButton = document.querySelector(".show-random")
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -108,22 +109,31 @@ var savedPosters = [];
 var currentPoster; // how we overwrite poster w/new poster
 
 // event listeners go here 👇
-
+showRandomButton.addEventListener("click", displayRandomPoster)
+window.addEventListener("load", displayRandomPoster)
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function generateRandomPoster() {
-  var randomImage = getRandomIndex(images)
-  var randomTitle = getRandomIndex(titles)
-  var randomQuote = getRandomIndex(quotes)
+function generateRandomPosterObject() {
+  var randomImage = images[getRandomIndex(images)]
+  var randomTitle = titles[getRandomIndex(titles)]
+  var randomQuote = quotes[getRandomIndex(quotes)]
   var newPoster = new Poster(randomImage, randomTitle, randomQuote)
   return newPoster
 }
 
+function displayPoster(newPoster) {
+  //take QS variables and assign them to newPoster object values
+  posterImage.src = newPoster.imageURL;
+  posterTitle.innerText = newPoster.title;
+  posterQuote.innerText = newPoster.quote;
+}
 
-
+function displayRandomPoster() {
+  displayPoster(generateRandomPosterObject())
+}
 // function testFunction() {
 //   currentPoster = new Poster("URL", "I'm the title");
 //   var titleText = document.querySelector(".poster-title")
