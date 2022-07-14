@@ -1,5 +1,15 @@
+var posterClass = require("../src/poster")
+//test poster to make sure our class works:
+var testPoster = new posterClass("./assets/butterfly.jpg", "determination", "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.")
+console.log(testPoster)
 // query selector variables go here 👇
 
+//make sure we can reassign img in html file:
+// var posterImage = document.querySelector(".poster-img")
+// posterImage.src="./assets/butterfly.jpg"
+
+var titleText = document.querySelector("poster-title")
+titleText = "clarity"
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -108,4 +118,3 @@ var currentPoster;
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
