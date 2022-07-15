@@ -1,20 +1,15 @@
 // query selector variables go here 👇
-//image:
 var posterImage = document.querySelector(".poster-img")
-//title:
 var posterTitle = document.querySelector(".poster-title")
-//quote:
 var posterQuote = document.querySelector(".poster-quote")
-//Show Random button:
 var showRandomButton = document.querySelector(".show-random")
-//Show Make Your Own Poster button:
 var makeOwnPosterButton = document.querySelector(".show-form")
-//Show Poster Form
 var posterForm = document.querySelector(".poster-form")
-console.log(posterForm)
-//Hide Main Page
 var mainPage = document.querySelector(".main-poster")
-
+var showSavedButton = document.querySelector(".show-saved")
+var showSavedPosters = document.querySelector(".saved-posters")
+var nevermindButton = document.querySelector(".show-main")
+var backToMainButton = document.querySelector(".back-to-main")
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -115,12 +110,16 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster; // how we overwrite poster w/new poster
+//var currentPoster; // how we overwrite poster w/new poster
 
 // event listeners go here 👇
 showRandomButton.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 makeOwnPosterButton.addEventListener("click", showForm)
+showSavedButton.addEventListener("click", showSaved)
+nevermindButton.addEventListener("click", goBack)
+backToMainButton.addEventListener("click", goBack)
+
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -135,7 +134,6 @@ function generateRandomPosterObject() {
 }
 
 function displayPoster(newPoster) {
-  //take QS variables and assign them to newPoster object values
   posterImage.src = newPoster.imageURL;
   posterTitle.innerText = newPoster.title;
   posterQuote.innerText = newPoster.quote;
@@ -149,13 +147,19 @@ function showForm() {
   mainPage.classList.add("hidden")
   posterForm.classList.remove("hidden")
 }
-// function testFunction() {
-//   currentPoster = new Poster("URL", "I'm the title");
-//   var titleText = document.querySelector(".poster-title")
-//   titleText.innerText = currentPoster.title;
-// }
-// testFunction();
 
-// testFunction()
+function showSaved() {
+  mainPage.classList.add("hidden")
+  showSavedPosters.classList.remove("hidden")
+}
 
-// (we've provided one for you to get you started)!
+function goBack() {
+  if(showSavedPosters.classList.contains("hidden")) {
+    posterForm.classList.add("hidden")
+    mainPage.classList.remove("hidden")
+  }
+  if(posterForm.classList.contains("hidden")) {
+    showSavedPosters.classList.add("hidden")
+    mainPage.classList.remove("hidden")
+  }
+}
