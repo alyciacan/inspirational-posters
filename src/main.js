@@ -7,6 +7,15 @@ var posterTitle = document.querySelector(".poster-title")
 var posterQuote = document.querySelector(".poster-quote")
 //Show Random button:
 var showRandomButton = document.querySelector(".show-random")
+//Show Make Your Own Poster button:
+var makeOwnPosterButton = document.querySelector(".show-form")
+//Show Poster Form
+var posterForm = document.querySelector(".poster-form")
+console.log(posterForm)
+//Hide Main Page
+var mainPage = document.querySelector(".main-poster")
+
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -111,6 +120,7 @@ var currentPoster; // how we overwrite poster w/new poster
 // event listeners go here 👇
 showRandomButton.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
+makeOwnPosterButton.addEventListener("click", showForm)
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -133,6 +143,11 @@ function displayPoster(newPoster) {
 
 function displayRandomPoster() {
   displayPoster(generateRandomPosterObject())
+}
+
+function showForm() {
+  mainPage.classList.add("hidden")
+  posterForm.classList.remove("hidden")
 }
 // function testFunction() {
 //   currentPoster = new Poster("URL", "I'm the title");
