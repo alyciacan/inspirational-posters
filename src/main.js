@@ -12,7 +12,7 @@ var nevermindButton = document.querySelector(".show-main")
 var backToMainButton = document.querySelector(".back-to-main")
 var showMyPosterButton = document.querySelector(".make-poster")
 var savePosterButton = document.querySelector(".save-poster")
-
+var savedPostersGrid = document.querySelector(".saved-posters-grid")
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -130,14 +130,6 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function generateRandomPosterObject() {
-  var randomImage = images[getRandomIndex(images)]
-  var randomTitle = titles[getRandomIndex(titles)]
-  var randomQuote = quotes[getRandomIndex(quotes)]
-  var newPoster = new Poster(randomImage, randomTitle, randomQuote)
-  return newPoster
-}
-
 function displayPoster(newPoster) {
   posterImage.src = newPoster.imageURL;
   posterTitle.innerText = newPoster.title;
@@ -145,8 +137,10 @@ function displayPoster(newPoster) {
 }
 
 function displayRandomPoster() {
-  currentPoster = displayPoster(generateRandomPosterObject())
-  console.log(currentPoster)
+  currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+  posterImage.src = currentPoster.imageURL;
+  posterTitle.innerText = currentPoster.title;
+  posterQuote.innerText = currentPoster.quote;
   return currentPoster
 }
 
@@ -158,6 +152,7 @@ function showForm() {
 function showSaved() {
   mainPage.classList.add("hidden")
   showSavedPosters.classList.remove("hidden")
+  showSavedPosters()
 }
 
 function goBack() {
@@ -186,7 +181,22 @@ function showMyPoster() {
 }
 
 function savePoster() {
-  displayRandomPoster()
-  savedPosters.push(currentPoster)
-  console.log(savedPosters)
+  if(!savedPosters.includes(currentPoster)) {
+    savedPosters.push(currentPoster)
+  }
 }
+
+function showSavedPosters() {
+  for (var i = 0; i < savedPosters.length; i++) {
+    savedPostersGrid.innerHTML +=
+    `<article class = "thumbnail-poster">
+    <img src=${savedPosters[i].imageURL} />
+    <h2>${savedPosters[i].title}</h2>
+    <h4>${savedPosters[i].quote}</h4>
+    </article>`
+  }
+}
+
+// function showSaved() {
+//
+// }
