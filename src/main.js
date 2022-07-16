@@ -11,6 +11,7 @@ var showSavedPosters = document.querySelector(".saved-posters")
 var nevermindButton = document.querySelector(".show-main")
 var backToMainButton = document.querySelector(".back-to-main")
 var showMyPosterButton = document.querySelector(".make-poster")
+var savePosterButton = document.querySelector(".save-poster")
 
 
 // we've provided you with some data to work with 👇
@@ -112,7 +113,7 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-//var currentPoster; // how we overwrite poster w/new poster
+var currentPoster;
 
 // event listeners go here 👇
 showRandomButton.addEventListener("click", displayRandomPoster)
@@ -122,6 +123,7 @@ showSavedButton.addEventListener("click", showSaved)
 nevermindButton.addEventListener("click", goBack)
 backToMainButton.addEventListener("click", goBack)
 showMyPosterButton.addEventListener("click", showMyPoster)
+savePosterButton.addEventListener("click", savePoster)
 
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
@@ -143,10 +145,10 @@ function displayPoster(newPoster) {
 }
 
 function displayRandomPoster() {
-  displayPoster(generateRandomPosterObject())
+  currentPoster = displayPoster(generateRandomPosterObject())
+  console.log(currentPoster)
+  return currentPoster
 }
-
-displayRandomPoster()
 
 function showForm() {
   mainPage.classList.add("hidden")
@@ -175,10 +177,16 @@ function showMyPoster() {
   mainPage.classList.remove("hidden")
   var userGeneratedURL = document.getElementById('poster-image-url').value;
   var userGeneratedTitle = document.getElementById('poster-title').value;
-  var userGeneratedQuote = document.getElementById('poster-quote').value
+  var userGeneratedQuote = document.getElementById('poster-quote').value;
   var usersPoster = new Poster (userGeneratedURL, userGeneratedTitle, userGeneratedQuote)
   displayPoster(usersPoster);
   images.push(userGeneratedURL);
   titles.push(userGeneratedTitle);
   quotes.push(userGeneratedQuote);
+}
+
+function savePoster() {
+  displayRandomPoster()
+  savedPosters.push(currentPoster)
+  console.log(savedPosters)
 }
