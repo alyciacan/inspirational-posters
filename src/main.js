@@ -146,6 +146,8 @@ function displayRandomPoster() {
   displayPoster(generateRandomPosterObject())
 }
 
+displayRandomPoster()
+
 function showForm() {
   mainPage.classList.add("hidden")
   posterForm.classList.remove("hidden")
@@ -169,9 +171,14 @@ function goBack() {
 
 function showMyPoster() {
   event.preventDefault();
+  posterForm.classList.add("hidden")
+  mainPage.classList.remove("hidden")
   var userGeneratedURL = document.getElementById('poster-image-url').value;
   var userGeneratedTitle = document.getElementById('poster-title').value;
   var userGeneratedQuote = document.getElementById('poster-quote').value
   var usersPoster = new Poster (userGeneratedURL, userGeneratedTitle, userGeneratedQuote)
   displayPoster(usersPoster);
+  images.push(userGeneratedURL);
+  titles.push(userGeneratedTitle);
+  quotes.push(userGeneratedQuote);
 }
