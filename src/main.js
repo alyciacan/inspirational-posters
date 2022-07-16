@@ -11,7 +11,8 @@ var showSavedPosters = document.querySelector(".saved-posters")
 var nevermindButton = document.querySelector(".show-main")
 var backToMainButton = document.querySelector(".back-to-main")
 var showMyPosterButton = document.querySelector(".make-poster")
-
+var savePosterButton = document.querySelector(".save-poster")
+var savedPostersGrid = document.querySelector(".saved-posters-grid")
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -112,7 +113,7 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-//var currentPoster; // how we overwrite poster w/new poster
+var currentPoster;
 
 // event listeners go here 👇
 showRandomButton.addEventListener("click", displayRandomPoster)
@@ -122,18 +123,12 @@ showSavedButton.addEventListener("click", showSaved)
 nevermindButton.addEventListener("click", goBack)
 backToMainButton.addEventListener("click", goBack)
 showMyPosterButton.addEventListener("click", showMyPoster)
+savePosterButton.addEventListener("click", savePoster)
+showSavedButton.addEventListener("click", displaySavedPosters)
 
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-}
-
-function generateRandomPosterObject() {
-  var randomImage = images[getRandomIndex(images)]
-  var randomTitle = titles[getRandomIndex(titles)]
-  var randomQuote = quotes[getRandomIndex(quotes)]
-  var newPoster = new Poster(randomImage, randomTitle, randomQuote)
-  return newPoster
 }
 
 function displayPoster(newPoster) {
@@ -143,10 +138,12 @@ function displayPoster(newPoster) {
 }
 
 function displayRandomPoster() {
-  displayPoster(generateRandomPosterObject())
+  currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+  posterImage.src = currentPoster.imageURL;
+  posterTitle.innerText = currentPoster.title;
+  posterQuote.innerText = currentPoster.quote;
+  return currentPoster
 }
-
-displayRandomPoster()
 
 function showForm() {
   mainPage.classList.add("hidden")
@@ -175,10 +172,29 @@ function showMyPoster() {
   mainPage.classList.remove("hidden")
   var userGeneratedURL = document.getElementById('poster-image-url').value;
   var userGeneratedTitle = document.getElementById('poster-title').value;
-  var userGeneratedQuote = document.getElementById('poster-quote').value
+  var userGeneratedQuote = document.getElementById('poster-quote').value;
   var usersPoster = new Poster (userGeneratedURL, userGeneratedTitle, userGeneratedQuote)
   displayPoster(usersPoster);
   images.push(userGeneratedURL);
   titles.push(userGeneratedTitle);
   quotes.push(userGeneratedQuote);
+}
+
+function savePoster() {
+  if(!savedPosters.includes(currentPoster)) {
+    savedPosters.push(currentPoster)
+  }
+}
+
+function displaySavedPosters() {
+  var posterHTML = ""
+  for (var i = 0; i < savedPosters.length; i++) {
+    posterHTML +=
+    `<article class = "mini-poster">
+    <img class="poster-img" id=${savedPosters[i].id} src= ${savedPosters[i].imageURL} />
+    <h2 class="poster-title">${savedPosters[i].title}</h2>
+    <h4 class="poster-quote">${savedPosters[i].quote}</h4>
+    </article>`
+  }
+  savedPostersGrid.innerHTML = posterHTML
 }
