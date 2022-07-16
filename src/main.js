@@ -13,6 +13,10 @@ var backToMainButton = document.querySelector(".back-to-main")
 var showMyPosterButton = document.querySelector(".make-poster")
 var savePosterButton = document.querySelector(".save-poster")
 var savedPostersGrid = document.querySelector(".saved-posters-grid")
+// var miniPosters = document.querySelectorAll(".mini-poster")
+var userGeneratedURL = document.getElementById('poster-image-url');
+var userGeneratedTitle = document.getElementById('poster-title');
+var userGeneratedQuote = document.getElementById('poster-quote');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -125,6 +129,7 @@ backToMainButton.addEventListener("click", goBack)
 showMyPosterButton.addEventListener("click", showMyPoster)
 savePosterButton.addEventListener("click", savePoster)
 showSavedButton.addEventListener("click", displaySavedPosters)
+// miniPosters.addEventListener("dblclick", deletePoster)
 
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
@@ -170,10 +175,7 @@ function showMyPoster() {
   event.preventDefault();
   posterForm.classList.add("hidden")
   mainPage.classList.remove("hidden")
-  var userGeneratedURL = document.getElementById('poster-image-url').value;
-  var userGeneratedTitle = document.getElementById('poster-title').value;
-  var userGeneratedQuote = document.getElementById('poster-quote').value;
-  var usersPoster = new Poster (userGeneratedURL, userGeneratedTitle, userGeneratedQuote)
+  var usersPoster = new Poster (userGeneratedURL.value, userGeneratedTitle.value, userGeneratedQuote.value)
   displayPoster(usersPoster);
   images.push(userGeneratedURL);
   titles.push(userGeneratedTitle);
@@ -198,3 +200,8 @@ function displaySavedPosters() {
   }
   savedPostersGrid.innerHTML = posterHTML
 }
+
+// function deletePoster() {
+//   console.log(miniPosters.innerHTML)
+//
+// }
