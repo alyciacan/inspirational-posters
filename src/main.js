@@ -124,7 +124,7 @@ nevermindButton.addEventListener("click", goBack)
 backToMainButton.addEventListener("click", goBack)
 showMyPosterButton.addEventListener("click", showMyPoster)
 savePosterButton.addEventListener("click", savePoster)
-showSavedButton.addEventListener("click", showSavedPosters)
+showSavedButton.addEventListener("click", displaySavedPosters)
 
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
@@ -186,7 +186,7 @@ function savePoster() {
   }
 }
 
-function showSavedPosters() {
+function displaySavedPosters() {
   var posterHTML = ""
   for (var i = 0; i < savedPosters.length; i++) {
     posterHTML +=
@@ -197,5 +197,4 @@ function showSavedPosters() {
     </article>`
   }
   savedPostersGrid.innerHTML = posterHTML
-  console.log("hello")
 }
