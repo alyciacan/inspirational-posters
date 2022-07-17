@@ -35,4 +35,4 @@
 * Time zone differences made scheduling slightly more difficult
 * Newness of collaborative Github workflow was challenging at first, but both partners eventually gained confidence in using it effectively
 * Being unfamiliar with the project scope and time requirements made it difficult for team members to anticipate the best way to format commit messages and branch names, but this improved with experience.
-* The deleting posters function, Iteration 4, proved to be a challenge despite multiple attempts and independent research around event bubbling and propagation
+* The deleting posters function, Iteration 4, proved to be a challenge despite multiple attempts and independent research around event bubbling and propagation. Achieved partial functionality. 
