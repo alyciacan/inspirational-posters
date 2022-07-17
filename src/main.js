@@ -13,10 +13,10 @@ var backToMainButton = document.querySelector(".back-to-main")
 var showMyPosterButton = document.querySelector(".make-poster")
 var savePosterButton = document.querySelector(".save-poster")
 var savedPostersGrid = document.querySelector(".saved-posters-grid")
-// var miniPosters = document.querySelectorAll(".mini-poster")
-var userGeneratedURL = document.getElementById('poster-image-url');
-var userGeneratedTitle = document.getElementById('poster-title');
-var userGeneratedQuote = document.getElementById('poster-quote');
+var miniPosters = document.querySelectorAll(".mini-poster")
+var userGeneratedURL = document.getElementById('poster-image-url')
+var userGeneratedTitle = document.getElementById('poster-title')
+var userGeneratedQuote = document.getElementById('poster-quote')
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -38,7 +38,7 @@ var images = [
   "./assets/squirrel.jpg",
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
-];
+]
 var titles = [
   "determination",
   "success",
@@ -75,7 +75,7 @@ var titles = [
   "trust",
   "understanding",
   "wisdom"
-];
+]
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
@@ -115,25 +115,26 @@ var quotes = [
   "No matter what people tell you, words and ideas can change the world.",
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
-];
-var savedPosters = [];
-var currentPoster;
+]
+var savedPosters = []
+var currentPoster
 
 // event listeners go here 👇
 showRandomButton.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 makeOwnPosterButton.addEventListener("click", showForm)
-showSavedButton.addEventListener("click", showSaved)
+showSavedButton.addEventListener("click", showSavedArray)
 nevermindButton.addEventListener("click", goBack)
 backToMainButton.addEventListener("click", goBack)
 showMyPosterButton.addEventListener("click", showMyPoster)
 savePosterButton.addEventListener("click", savePoster)
 showSavedButton.addEventListener("click", displaySavedPosters)
-// miniPosters.addEventListener("dblclick", deletePoster)
+savedPostersGrid.addEventListener("dblclick", function(e) { deletePoster(e)
+})
 
 // functions and event handlers go here 👇
 function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+  return Math.floor(Math.random() * array.length)
 }
 
 function displayPoster(newPoster) {
@@ -144,9 +145,9 @@ function displayPoster(newPoster) {
 
 function displayRandomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
-  posterImage.src = currentPoster.imageURL;
-  posterTitle.innerText = currentPoster.title;
-  posterQuote.innerText = currentPoster.quote;
+  posterImage.src = currentPoster.imageURL
+  posterTitle.innerText = currentPoster.title
+  posterQuote.innerText = currentPoster.quote
   return currentPoster
 }
 
@@ -155,7 +156,7 @@ function showForm() {
   posterForm.classList.remove("hidden")
 }
 
-function showSaved() {
+function showSavedArray() {
   mainPage.classList.add("hidden")
   showSavedPosters.classList.remove("hidden")
 }
@@ -173,13 +174,13 @@ function goBack() {
 
 function showMyPoster() {
   event.preventDefault();
+  var usersPoster = new Poster (userGeneratedURL.value, userGeneratedTitle.value, userGeneratedQuote.value)
+  displayPoster(usersPoster)
   posterForm.classList.add("hidden")
   mainPage.classList.remove("hidden")
-  var usersPoster = new Poster (userGeneratedURL.value, userGeneratedTitle.value, userGeneratedQuote.value)
-  displayPoster(usersPoster);
-  images.push(userGeneratedURL);
-  titles.push(userGeneratedTitle);
-  quotes.push(userGeneratedQuote);
+  images.push(userGeneratedURL)
+  titles.push(userGeneratedTitle)
+  quotes.push(userGeneratedQuote)
 }
 
 function savePoster() {
@@ -201,7 +202,12 @@ function displaySavedPosters() {
   savedPostersGrid.innerHTML = posterHTML
 }
 
-// function deletePoster() {
-//   console.log(miniPosters.innerHTML)
-//
-// }
+function deletePoster(e) {
+  var unwantedPoster = e.target.closest('article')
+  e.target.closest('article').remove()
+  for (var eaPoster = 0; eaPoster < savedPosters.length; eaPoster ++){
+    if (savedPosters[eaPoster].id === unwantedPoster.children[eaPoster].id) {
+      savedPosters.splice[eaPoster, 1]
+    }
+  }
+}
