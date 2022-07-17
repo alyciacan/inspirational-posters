@@ -29,7 +29,7 @@
 * Effectively used Google Calendar as a time management tool to pre-plan and block out chunks of time throughout the week for each iteration of our project
 * Learned to be resourceful utilizing our mentors, rocks, and independent research to troubleshoot and solve problems
 * On the technical side, deepened our understanding of reading and writing code, how the DOM works, and using event listeners to create web page functionality
-* Successfully wrong clean, DRY, organized JavaScript code with effective, compassionate variable and function names
+* Wrote clean, DRY, organized JavaScript code with effective, compassionate variable and function names
 
 ### Challenges
 * Time zone differences made scheduling slightly more difficult
